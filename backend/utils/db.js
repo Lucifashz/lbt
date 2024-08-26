@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config()
 
-mongoose.connect("mongodb+srv://achrangga44:CPPVbSjmLjXnHr3l@cluster0.avrqa.mongodb.net/db_badminton?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect(process.env.MONGO_URI)
    .then(() => {
       console.log('Connected to the database');
    }).catch((error) => {
