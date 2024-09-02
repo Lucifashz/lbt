@@ -19,7 +19,19 @@ app.use(express.json());
 // paypal payment api for client key; 
 app.use(PaypalRoute);
 
+app.use("/db", (req, res) => {
+  res.send(process.env.MONGO_URI);
+});
+
+app.use("/access", (req, res) => {
+  res.send(ACCESS_TOKEN_SECRET);
+});
+
 // home page
+app.use("/refresh", (req, res) => {
+  res.send(REFRESH_TOKEN_SECRET);
+});
+
 app.use("/", (req, res) => {
   res.send("Halaman home");
 });
