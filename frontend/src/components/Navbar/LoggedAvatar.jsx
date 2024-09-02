@@ -27,7 +27,7 @@ export default function LoggedAvatar(props) {
                   textValue="Profil"
                   startContent=
                   {
-                     <Link className="flex items-center gap-2 py-1.5 px-2"  to="/settings/profile">
+                     <Link className="flex items-center gap-2 py-1.5 px-2"  to="/profile">
                         <UserRound className="size-4"/>
                         Profil
                      </Link>

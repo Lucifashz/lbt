@@ -1,6 +1,7 @@
 import React from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
-import Player from "../Player";
+import PlayerPartner from "./PlayerPartner";
+
 
 export default function DeletePartner(props) {
    const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -11,7 +12,7 @@ export default function DeletePartner(props) {
 
    return (
       <>
-         <Player id={props.partner}/>
+         <PlayerPartner id={props.partner}/>
          <Button 
             onPress={onOpen} 
             className="bg-cyan-950 text-white"

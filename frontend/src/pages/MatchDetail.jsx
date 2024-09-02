@@ -20,6 +20,7 @@ export default function MatchDetail() {
 
    // Agar axios dapat membaca cookies
    axios.defaults.withCredentials = true;
+
    React.useEffect(() => {
       const getMatchById = async() => {
          const response = await axios.get(`http://localhost:3000/matches/${id}`);
@@ -98,6 +99,8 @@ const dateNow = new Date().toISOString()
                         match.refereeId === profile.userId ? 
                         <HandleSubmit 
                            id={match._id}
+                           scoreP1={match.matchOne.teamOne.score}
+                           scoreP2={match.matchOne.teamTwo.score}
                            match="matchOne"
                         /> : "" 
                      }
@@ -136,6 +139,8 @@ const dateNow = new Date().toISOString()
                         match.refereeId === profile.userId ? 
                         <HandleSubmit 
                            id={match._id}
+                           scoreP1={match.matchTwo.teamOne.score}
+                           scoreP2={match.matchTwo.teamTwo.score}
                            match="matchTwo"
                         /> : "" 
                      }
@@ -174,6 +179,8 @@ const dateNow = new Date().toISOString()
                         match.refereeId === profile.userId ? 
                         <HandleSubmit 
                            id={match._id}
+                           scoreP1={match.matchThree.teamOne.score}
+                           scoreP2={match.matchThree.teamTwo.score}
                            match="matchThree"
                         /> : "" 
                      }
@@ -218,6 +225,8 @@ const dateNow = new Date().toISOString()
                         match.refereeId === profile.userId ? 
                         <HandleSubmit 
                            id={match._id}
+                           scoreP1={match.matchOne.teamOne.score}
+                           scoreP2={match.matchOne.teamTwo.score}
                            match="matchOne"
                         /> : "" 
                      }
@@ -256,6 +265,8 @@ const dateNow = new Date().toISOString()
                         match.refereeId === profile.userId ? 
                         <HandleSubmit 
                            id={match._id}
+                           scoreP1={match.matchTwo.teamOne.score}
+                           scoreP2={match.matchTwo.teamTwo.score}
                            match="matchTwo"
                         /> : "" 
                      }
@@ -294,6 +305,8 @@ const dateNow = new Date().toISOString()
                         match.refereeId === profile.userId ? 
                         <HandleSubmit 
                            id={match._id}
+                           scoreP1={match.matchThree.teamOne.score}
+                           scoreP2={match.matchThree.teamTwo.score}
                            match="matchThree"
                         /> : "" 
                      }
@@ -302,41 +315,6 @@ const dateNow = new Date().toISOString()
             </div>
          </div>
 
-         {/* <div className="columns p-5">
-            <div className="mr-auto">
-               <p>Player 1</p>
-               <p>{match.playerOne.id}</p>
-               <Player id={match.playerOne.id} />
-               <p>{match.playerOne.score}</p>
-            </div>
-            <div>
-            <p>Player 2</p>
-               <p>{match.playerTwo.id}</p>
-               <Player id={match.playerTwo.id} />
-               <p>{match.playerTwo.score}</p>
-            </div>
-         </div>
-         { match.referee.id === profile.userId ? 
-            <div className="is-flex is-justify-content-space-between">
-               <HandleScore 
-                  match={match}
-                  idPlayer={match.playerOne.id}
-                  scorePlayer={match.playerOne.score}
-                  isPlayer='playerOne'
-               />
-               
-               <div className="is-flex is-align-items-center is-flex-direction-column">
-                  <p>id Wasit: {match.referee.id}</p>
-                  <p>id Wasit: {profile.userId}</p>
-                  <p>id Wasit: {profile.name}</p>
-               </div>
-               <HandleScore 
-                  match={match}
-                  idPlayer={match.playerTwo.id}
-                  scorePlayer={match.playerTwo.score}
-                  isPlayer='playerTwo'
-               /> 
-            </div> : '' } */}
       </>
    )
 }

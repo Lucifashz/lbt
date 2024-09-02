@@ -56,7 +56,7 @@ export default function NavbarHeader() {
       },
       {
          name: "Pemain",
-         link: "/players",
+         link: "/users",
       }
    ];
 

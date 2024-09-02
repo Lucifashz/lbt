@@ -1,6 +1,6 @@
 import express from "express";
 import { 
-   createChallenge, getChallanges, isPlayerHasPartner, 
+   createChallenge, getChallanges, 
    getChallangesByChallengedId, getChallangesByChallengerId,
    updateChallengeByChallanged, updateChallengeByChallanger,
    updateChallengeMatchStatusByChallanged
@@ -10,7 +10,6 @@ import {
 const router = express.Router();
 
 router.post('/challenge', createChallenge);
-router.post('/challenge-check-double', isPlayerHasPartner);
 router.get('/challenges', getChallanges);
 router.get('/challenges-by-challenged-id/:id', getChallangesByChallengedId);
 router.get('/challenges-by-challenger-id/:id', getChallangesByChallengerId);

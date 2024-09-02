@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import {Modal, ModalContent, ModalBody, Button, useDisclosure, DatePicker, Select, SelectItem, TimeInput} from "@nextui-org/react";
+import Swal from "sweetalert2";
 import {getLocalTimeZone, today} from "@internationalized/date";
 
 
@@ -13,8 +14,6 @@ export default function ChallengeCard(props) {
    const [challenges, setChallenges] = React.useState([]);
    const [playersItem, setPlayersItem] = React.useState([]);
    const [playersItem2, setPlayersItem2] = React.useState([]);
-   const [message, setMessage] = React.useState("");
-   const [isValid, setIsValid] = React.useState(false);
 
 
    const types = [
@@ -25,8 +24,7 @@ export default function ChallengeCard(props) {
    React.useEffect(() => {
       getChallenges();
       getPlayers();
-      checkDouble(props.playerLogin.userId, props.player._id);
-   }, [matchDate, isValid, matchType, matchTime]);
+   }, [matchDate, matchType, matchTime]);
 
    const getChallenges = async () => {
       await axios.get(`http://localhost:3000/challenges`)
@@ -48,22 +46,6 @@ export default function ChallengeCard(props) {
    }
 
 
-   const checkDouble = async (login, player) => {
-      await axios.post("http://localhost:3000/challenge-check-double", {
-         "challenger": login,
-         "challenged": player,
-         "matchType": matchType
-      })
-      .then((response) => { 
-         setMessage("")
-         setIsValid(true)
-      })
-      .catch((error) => { 
-         setMessage(error.response.data.messageError);
-         setIsValid(false);
-      })
-   }
-
    const createChallenge = async (e) => {
       e.preventDefault()
       await axios.post("http://localhost:3000/challenge", {
@@ -76,15 +58,29 @@ export default function ChallengeCard(props) {
          "matchDate": `${matchDate.toString()} ${matchTime.toString()}`
       })
       .then((response) => { 
-         console.log(response);
-         setMatchDate(today(getLocalTimeZone()))
-         setMatchType("")
-         setMatchTime("")
-         setIsValid(true)
+         setMatchDate(today(getLocalTimeZone()));
+         setMatchReferee("");
+         setMatchType("");
+         setMatchTime("");
+         Swal.fire({
+               title: 'Berhasil!',  
+               text: `Kamu berhasil mengirim ajakan untuk bertanding`,  
+               icon: 'success',  
+               confirmButtonText: 'OK'
+         });
       })
       .catch((error) => { 
-         setIsValid(true)
-      })
+         setMatchDate(today(getLocalTimeZone()).add({ days: 1 }));
+         setMatchReferee("");
+         setMatchType("");
+         setMatchTime("");
+         Swal.fire({
+               title: 'Gagal!',  
+               text: `${error.response.data.messageError}`,  
+               icon: 'error',  
+               confirmButtonText: 'OK'
+         });
+      });
    }
 
    const isRequested = challenges.find((challenge) => {
@@ -134,7 +130,6 @@ const updatePlayersItem2 = (players) => {
                      <>
                         <ModalBody>
                            <h1 className="text-xl font-semibold text-cyan-950 mb-5">Kamu ngajak {props.player.name} buat tanding, nih?</h1>
-                           <p className="text-sm text-red-500">{message}</p>
                            <form className="flex w-full max-w flex-col gap-7" onSubmit={createChallenge}>
                               <Select
                                  items={types}
@@ -176,7 +171,7 @@ const updatePlayersItem2 = (players) => {
                               <Button 
                                  type="submit" 
                                  className="bg-cyan-950 text-white" 
-                                 onPress={isValid ? onClose : ""}
+                                 onPress={onClose}
                                  isDisabled={!matchType || !matchTime || !matchReferee ? true : false}
                               >
                                  Ajak tanding

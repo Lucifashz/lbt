@@ -177,11 +177,11 @@ const findLogin2 = (array, userId) => {
          </Button>
          </DropdownTrigger>
          <DropdownMenu variant="faded" aria-label="Dropdown menu with description">
-            <DropdownSection title="Notifikasi tantangan">  
+            <DropdownSection title="Notifikasi tantangan dan partner">  
                {
                   topSixByChallenged.map((challenge, i) => (
                      <DropdownItem
-                        key={i+3}
+                        key={challenge._id}
                         textValue="Profil"
                         className="block p-0 mb-3 last:mb-0 bg-gray-200"
                         startContent=
@@ -198,18 +198,18 @@ const findLogin2 = (array, userId) => {
                                  <Player 
                                     id={challenge.challenger.id} 
                                     status="rejected"
-                                    text="Kamu telah menolak bertanding dengan"
+                                    text="Kamu telah menolak ajakan untuk bertanding dengan"
                                  /> :
                                  challenge.challenged.id === props.profile.userId
                                  && challenge.matchStatus === "accepted" ? 
                                  <Player 
                                     id={challenge.challenger.id} 
                                     status="accepted" 
-                                    text="Kamu telah menerima bertanding dengan"
+                                    text="Kamu telah menerima ajakan untuk bertanding dengan"
                                  /> : 
                                  <Player 
                                     id={challenge.challenger.id}
-                                    textRight="telah menantang Kamu bertanding"
+                                    textRight="telah menantang Kamu untuk bertanding"
                                  /> 
                               }
                            </Link>
@@ -221,7 +221,7 @@ const findLogin2 = (array, userId) => {
                {
                   topSixByChallenger.map((challenge, i) => (
                      <DropdownItem
-                        key={i+2}
+                        key={challenge._id}
                         textValue="Profil"
                         className="block p-0 mb-3 last:mb-0 bg-gray-200"
                         startContent=
@@ -238,18 +238,18 @@ const findLogin2 = (array, userId) => {
                                  <Player 
                                     id={challenge.challenged.id} 
                                     status="rejected"
-                                    text="Kamu ditolak bertading dengan"
+                                    text="Ajakan Kamu untuk bertanding telah ditolak oleh"
                                  /> : 
                                  challenge.challenged.id !== props.profile.userId
                                  && challenge.matchStatus === "accepted" ? 
                                  <Player 
                                     id={challenge.challenged.id} 
-                                    status="rejected"
-                                    text="Kamu diterima bertading dengan"
+                                    status="accepted"
+                                    text="Ajakan Kamu untuk bertanding telah diterima oleh"
                                  /> : 
                                  <Player 
                                     id={challenge.challenged.id} 
-                                    textLeft="Kamu telah mengirim pertandingan ke"
+                                    textLeft="Kamu telah mengirim ajakan untuk bertanding ke"
                                  />
                               }
                            </Link>
@@ -278,18 +278,18 @@ const findLogin2 = (array, userId) => {
                                  <Player 
                                     id={partner.sender.id} 
                                     status="rejected"
-                                    text="Kamu telah menolak partner dengan"
+                                    text="Kamu telah menolak untuk menjadi partner dengan"
                                  /> : 
                                  partner.receiver.id === props.profile.userId
                                  && partner.partnerStatus === "accepted" ? 
                                  <Player 
                                     id={partner.sender.id} 
                                     status="rejected"
-                                    text="Kamu telah menerima partner dengan"
+                                    text="Kamu telah menerima untuk menjadi partner dengan"
                                  /> : 
                                  <Player 
                                     id={partner.sender.id} 
-                                    textRight="mengirim permintaan menjadi partner kamu"
+                                    textRight="telah mengirim permintaan untuk menjadi partner Kamu"
                                  />
                               }
                            </Link>
@@ -318,18 +318,17 @@ const findLogin2 = (array, userId) => {
                                  <Player 
                                     id={partner.receiver.id} 
                                     status="rejected"
-                                    text="Kamu ditolak berpartner"
+                                    text="Ajakan berpartner Kamu telah ditolak oleh"
                                  /> : 
                                  partner.receiver.id !== props.profile.userId
                                  && partner.partnerStatus === "accepted" ? 
                                  <Player 
                                     id={partner.receiver.id} 
                                     status="rejected"
-                                    text="Kamu diterima berpartner"
+                                    text="Ajakan berpartner Kamu telah diterima oleh"
                                  /> : 
                                  <Player 
                                     id={partner.receiver.id} 
-                                    status="rejected"
                                     textLeft="Kamu telah mengirim partner dengan ke"
                                  />
                               }

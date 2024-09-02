@@ -1,9 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import {User, Avatar} from "@nextui-org/react";
+import {User} from "@nextui-org/react";
 
-export default function Player(props) {
+export default function PlayerPartner(props) {
    const [player, setPlayer] = React.useState({});
 
    React.useEffect(() => {
@@ -15,15 +15,12 @@ export default function Player(props) {
       setPlayer(response.data);
    }
 
-   if (!props.id) {
-      return <div></div>;
-   }
 
    return (
       <>
-         <p>Partner Kamu :</p>
          <User
-         typeof="key"
+            className="mt-3"
+            typeof="key"
             name={player.name}
             description={(
             <Link to={`/players/${player._id}`}>

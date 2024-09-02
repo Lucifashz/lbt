@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from 'lucide-react';
 import axios from "axios"
 
 
@@ -12,7 +13,9 @@ export default function Register() {
       "confirm-password": ""
    });
 
-   const [message, setMessage] = React.useState({})
+   const [message, setMessage] = React.useState({});
+   const [hidePassword, setHidePassword] = React.useState(true);
+   const [hideConfirmPassword, setHideConfirmPassword] = React.useState(true);
 
    const navigate = useNavigate()
 
@@ -37,7 +40,7 @@ export default function Register() {
                <h5 className="text-xl font-medium text-gray-900">Daftar Sekarang</h5>
                <div className="relative z-0" >
                   <input type="text" id="name" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " name="name" onChange={(e) => setPost({...post, [e.target.name]: e.target.value})} required/>
-                  <label htmlFor="name" className={`absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 ${post["name"] ? "z-10" : "-z-10"} origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 peer-focus:z-10 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1`}  >Nama</label>
+                  <label htmlFor="name" className={`absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 ${post["name"] ? "z-10" : "-z-10"} origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 peer-focus:z-10 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1`}  >Nama lengkap</label>
                   {post["name"] || message.nameError ? <p id="outlined_success_help" className="ml-2 text-xs text-red-500">{message.nameError}</p> : ''}
                </div>
                <div>
@@ -55,13 +58,31 @@ export default function Register() {
                   {post["email"] || message.emailError ? <p id="outlined_success_help" className="ml-2 text-xs text-red-500">{message.emailError || message.emailValid}</p> : ''}
                </div>
                <div className="relative z-0" >
-                  <input type="password" id="password" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " name="password" onChange={(e) => setPost({...post, [e.target.name]: e.target.value})} required/>
+                  <input type={hidePassword ? "password" : "text"} id="password" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " name="password" onChange={(e) => setPost({...post, [e.target.name]: e.target.value})} required/>
                   <label htmlFor="password" className={`absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 ${post["password"] ? "z-10" : "-z-10"} origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 peer-focus:z-10 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1`}  >Kata sandi</label>
+                  {
+                     hidePassword ?
+                     <button onClick={() => setHidePassword(false)} type="button" className="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600">
+                        <EyeOff className="size-3.5"/>
+                     </button> :
+                     <button onClick={() => setHidePassword(true)} type="button" className="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600">
+                        <Eye className="size-3.5"/>
+                     </button> 
+                  }
                </div>
                <div>
                   <div className="relative z-0" >
-                     <input type="password" id="confirm-password" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " name="confirm-password" onChange={(e) => setPost({...post, [e.target.name]: e.target.value})} required/>
+                     <input type={hideConfirmPassword ? "password" : "text"} id="confirm-password" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " name="confirm-password" onChange={(e) => setPost({...post, [e.target.name]: e.target.value})} required/>
                      <label htmlFor="confirm-password" className={`absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 ${post["confirm-password"] ? "z-10" : "-z-10"} origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 peer-focus:z-10 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1`}  >Konfirmasi kata sandi</label>
+                     {
+                        hideConfirmPassword ?
+                        <button onClick={() => setHideConfirmPassword(false)} type="button" className="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600">
+                           <EyeOff className="size-3.5"/>
+                        </button> :
+                        <button onClick={() => setHideConfirmPassword(true)} type="button" className="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600">
+                           <Eye className="size-3.5"/>
+                        </button> 
+                     }
                   </div>
                   {post["confirm-password"] || message.passwordMatchError ? <p id="outlined_success_help" className="ml-2 text-xs text-red-500">{message.passwordMatchError}</p> : ''}
                </div>

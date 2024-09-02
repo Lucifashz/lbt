@@ -16,10 +16,12 @@ export default function TablePartners() {
    const [sender, setSender] = React.useState([]);
    const [receiver, setReceiver] = React.useState([]);
    const [update, setUpdate] = React.useState(false);
+   const [msg, setMsg] = React.useState("")
 
    const navigate = useNavigate();
 
    React.useEffect(() => {
+
       refreshToken();
    }, [update]);
 
@@ -49,7 +51,6 @@ export default function TablePartners() {
       })
       .catch((error) => {
          console.log(error.response);
-         
       })
    }
 
@@ -60,27 +61,32 @@ export default function TablePartners() {
       })
       .catch((error) => {
          console.log(error.response);
-         
       })
    }
 
    const updatePartner = async (id, status, senderId, receiverId) => {
       setUpdate((update) => !update);
-      await axios.patch(`http://localhost:3000/partners-partner-status/${id}`, {
-         "partner-status": status,
-         "notification-status": "unread",
-      })
-      .then((response) => {
-      })
-      .catch((error) => {
-         console.log(error);
-      })
       if (status === "accepted") {
          axios.patch(`http://localhost:3000/add-partner/${senderId}`, {
             partner: receiverId
          })
-         .then(response => console.log('Success:', response.data))
-         .catch(error => console.error('Error:', error));
+         .then(async (response) => {
+            await axios.patch(`http://localhost:3000/partners-partner-status/${id}`, {
+            "partner-status": status,
+            "notification-status": "unread",
+            })
+            .then(response => {
+               setUpdate(prev => !prev)
+               setMsg("")
+            }).catch(error => console.log(error))
+         }).catch(error => setMsg(error.response.data.message));
+      } else if (status === "rejected") {
+         await axios.patch(`http://localhost:3000/partners-partner-status/${id}`, {
+            "partner-status": status,
+            "notification-status": "unread",
+         })
+         .then(response => setUpdate(prev => !prev))
+         .catch(error => console.log(error))
       }
    }
 
@@ -153,6 +159,7 @@ export default function TablePartners() {
             </div>
          </div>
          {profile.partnerId === "" ? "" : <DeletePartner deletePartner={deletePartner} partner={profile.partnerId}/>}
+         { msg ? <p className="text-red-500">Tidak bisa menambahkan partner, {msg}</p> : ""}
          {receiversElement}
          <Pagination 
             showControls

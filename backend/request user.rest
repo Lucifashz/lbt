@@ -4,11 +4,11 @@ GET  http://localhost:3000/users
 GET  http://localhost:3000/users/66c48f6152d35a31880785de
 
 ###
-PATCH   http://localhost:3000/add-partner/66c48f6152d35a31880785de
+PATCH   http://localhost:3000/add-partner/66cc6ee2f23a7209fb54317b
 Content-Type: application/json
 
 {
-   "partner": "66c48f6752d35a318807860e"
+   "partner": "66cc6f15f23a7209fb543224"
 }
 
 ###

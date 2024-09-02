@@ -28,7 +28,7 @@ export const createChallenge = async (req, res) => {
             res.status(404).json({message: error.message});
          })
       } else {
-         return res.status(400).json({ messageError: "Player ini belum punya partner, tidak bisa pertandingan ganda" });
+         return res.status(400).json({ messageError: "Player ini atau Kamu belum punya partner, tidak bisa pertandingan ganda" });
       }
    } else if (req.body["matchType"] === "single") {
          await Challenge.create({
@@ -51,20 +51,6 @@ export const createChallenge = async (req, res) => {
    }
 }
 
-export const isPlayerHasPartner = async (req, res) => {
-   const challenger = await User.findById(req.body["challenger"]);
-   const challenged = await User.findById(req.body["challenged"]);
-
-   if (req.body["matchType"] === "double") {
-      if (challenger.partnerId !== "" && challenged.partnerId !== "" ) {
-         return res.status(200).json({ success: `${req.body["matchType"]} ${challenger.partnerId} ${challenged.partnerId}` });
-      } else {
-         return res.status(400).json({ messageError: "Player ini atau Kamu belum punya partner, tidak bisa pertandingan ganda" });
-      }
-   } else if (req.body["matchType"] === "single") {
-      return res.status(200).json({ success: `${req.body["matchType"]}` });
-   }
-}
 
 export const getChallanges = async (req, res) => {
    await Challenge.find()

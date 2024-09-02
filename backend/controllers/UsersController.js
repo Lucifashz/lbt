@@ -230,7 +230,7 @@ export const login = async (req, res) => {
 
 				res.json({accessToken});
 			} else {
-				return res.status(400).json({ passwordError: "Kata sandi salah. Coba lagi atau klik Lupa sandi untuk mereset." });
+				return res.status(400).json({ passwordError: "Kata sandi salah. Coba lagi." });
 			}
 		} else {
 			return res.status(400).json({ messageError: "Username belum terdaftar" });

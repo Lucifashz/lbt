@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import {Card} from "@nextui-org/react";
-import DeletePartner from "./DeletePartner";
 
 export default function PartnerSender(props) {
    const [receiver, setReceiver] = React.useState({});

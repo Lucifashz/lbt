@@ -30,10 +30,8 @@ export default function PartnerCard(props) {
          "receiver": props.player._id
       })
       .then((response) => { 
-         console.log(response);
       })
       .catch((error) => { 
-         console.log(error);
       })
    }
 

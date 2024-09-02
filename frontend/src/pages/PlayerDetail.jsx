@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
-import Player from "../components/Player";
+import { useParams } from "react-router-dom";
+import Player from "../components/PlayerDetail/Player";
 
 
 export default function PlayerDetail() {
@@ -17,6 +17,7 @@ export default function PlayerDetail() {
       const response = await axios.get(`http://localhost:3000/users/${id}`);         
       setPlayer(response.data);
    }
+
 
 
    return (

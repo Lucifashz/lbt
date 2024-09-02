@@ -37,7 +37,7 @@ const rowPages = [
 ];
 
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "username", "email", "match total", "win", "lose", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["name", "username", "email", "actions"];
 
 export default function App() {
   const [filterValue, setFilterValue] = React.useState("");
@@ -148,18 +148,6 @@ export default function App() {
             <p className="text-bold text-sm text-default-500">{player.username}</p>
           </div>
         );
-      case "match total":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm text-default-500">100</p>
-          </div>
-        );
-      case "win - lose":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm text-default-500">15 - 5</p>
-          </div>
-        );
       case "actions":
         return (
           <div className="relative flex justify-end items-center gap-2">
@@ -242,7 +230,7 @@ export default function App() {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {playerLogin.userId ? players.length - 1 : players.length} users</span>
+          <span className="text-default-400 text-small">Total {players.length} users</span>
           <Select
           items={rowPages}
           label="Rows per page:"
@@ -325,9 +313,7 @@ export default function App() {
         {(column) => (
           <TableColumn
             key={column.uid}
-            align={column.uid === "actions" ? "center" :
-            column.uid === "match total" ? "center" : 
-            column.uid === "win - lose" ? "center" : "start"}
+            align={column.uid === "actions" ? "center" : "start"}
             allowsSorting={column.sortable}
           >
             {column.name}

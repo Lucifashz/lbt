@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import { Card, Button } from "@nextui-org/react";
 import { Check, X } from 'lucide-react';
-import DeletePartner from "./DeletePartner";
 
 
 export default function Partner(props) {
