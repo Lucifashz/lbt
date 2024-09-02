@@ -30,6 +30,10 @@ export const refreshToken = async (req, res) => {
          console.log(error);
       })
    } else {
+<<<<<<< HEAD
       return res.json({ message: "belum login" });
+=======
+      return res.status(200).json({ message: "belum login" });
+>>>>>>> bd117058ee4d01e6fc9596bc87d402f7f452659e
    }
 }

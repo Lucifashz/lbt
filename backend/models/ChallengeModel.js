@@ -46,7 +46,10 @@ const challengeSchema = new mongoose.Schema(
          required: true,
          enum: {
             values: ["single", "double"],
+<<<<<<< HEAD
             // message: "hanya"
+=======
+>>>>>>> bd117058ee4d01e6fc9596bc87d402f7f452659e
          },
       },
       matchDate: {

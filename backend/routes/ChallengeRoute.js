@@ -1,6 +1,10 @@
 import express from "express";
 import { 
+<<<<<<< HEAD
    createChallenge, getChallanges, isPlayerHasPartner, 
+=======
+   createChallenge, getChallanges, 
+>>>>>>> bd117058ee4d01e6fc9596bc87d402f7f452659e
    getChallangesByChallengedId, getChallangesByChallengerId,
    updateChallengeByChallanged, updateChallengeByChallanger,
    updateChallengeMatchStatusByChallanged
@@ -10,7 +14,10 @@ import {
 const router = express.Router();
 
 router.post('/challenge', createChallenge);
+<<<<<<< HEAD
 router.post('/challenge-check-double', isPlayerHasPartner);
+=======
+>>>>>>> bd117058ee4d01e6fc9596bc87d402f7f452659e
 router.get('/challenges', getChallanges);
 router.get('/challenges-by-challenged-id/:id', getChallangesByChallengedId);
 router.get('/challenges-by-challenger-id/:id', getChallangesByChallengerId);

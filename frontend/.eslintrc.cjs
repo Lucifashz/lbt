@@ -12,6 +12,10 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
+<<<<<<< HEAD
+=======
+    'react/jsx-no-target-blank': 'off',
+>>>>>>> bd117058ee4d01e6fc9596bc87d402f7f452659e
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },

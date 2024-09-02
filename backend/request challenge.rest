@@ -3,9 +3,15 @@ POST http://localhost:3000/challenge
 Content-Type: application/json
 
 {
+<<<<<<< HEAD
    "challenger": "66b07365c108484d53daacbc",
    "challengerPartner": "",
    "challenged": "66b06459542dd87d69e13737",
+=======
+   "challenger": "66d27a3024756caf326b14e0",
+   "challengerPartner": "",
+   "challenged": "66c872478910b3259dcdf4af",
+>>>>>>> bd117058ee4d01e6fc9596bc87d402f7f452659e
    "challengedPartner": "",
    "matchReferee": "66b196f9474311a4c546faec",
    "matchType": "double",
@@ -55,8 +61,13 @@ POST http://localhost:3000/challenge-check-double
 Content-Type: application/json
 
 {
+<<<<<<< HEAD
    "challenger": "66c6bea66df9ce7109fa69cd",
    "challenged": "66c6baa45e3516ed46fe68ea",
+=======
+   "challenger": "66c872478910b3259dcdf4af",
+   "challenged": "66c872738910b3259dcdf51c",
+>>>>>>> bd117058ee4d01e6fc9596bc87d402f7f452659e
    "matchType": "double"
 }
 
