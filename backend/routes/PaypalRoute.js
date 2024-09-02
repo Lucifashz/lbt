@@ -7,7 +7,7 @@ const router = express.Router();
 
 
 router.get('/paypal',  (req, res) => {
-   res.send(process.env.PAYPAL_CLIENT_ID);
+   res.send(process.env.ACCESS_TOKEN_SECRET);
 });
 
 export default router;
