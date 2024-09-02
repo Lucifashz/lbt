@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import PaypalRoute from "./routes/PaypalRoute.js";
 import "./utils/db.js";
 
+dotenv.config();
 
 const app = express();
 
