@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "version": 2,
     "name": "music-album",
     "builds": [
@@ -14,20 +13,4 @@
             "dest": "/index.js"
         }
     ]
-=======
-      "version": 2,
-      "name": "music-album",
-      "builds": [
-            {
-                  "src": "index.js",
-                  "use": "@vercel/node"
-            }
-      ],
-      "routes": [
-            {
-                  "src": "/(.*)",
-                  "dest": "/index.js"
-            }
-      ]
->>>>>>> bd117058ee4d01e6fc9596bc87d402f7f452659e
 }

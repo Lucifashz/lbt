@@ -1,1 +1,1 @@
-npm install bcrypt cookie-parser cors dotenv express express-validator jsonwebtoken mongoose nodemon validator
+npm install bcryptjs dotenv express express-async-handler jsonwebtoken mongoose morgan concurrently nodemon
