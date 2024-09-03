@@ -5,15 +5,6 @@ import cookieParser from "cookie-parser";
 import ChallengeRoute from "./routes/ChallengeRoute.js";
 import UserRoute from "./routes/UserRoute.js";
 import "./utils/db.js";
-import mongoose from "mongoose";
-
-
-mongoose.connect(process.env.MONGO_URI)
-   .then(() => {
-      console.log('Connected to the database');
-   }).catch((error) => {
-      console.log('Database connection error:', error);
-   });
 
 dotenv.config();
 
