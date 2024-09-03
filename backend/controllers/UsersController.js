@@ -1,3 +1,10 @@
+import User from "../models/UserModel.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import validator from "validator";
+
+
+
 export const getUsers = async (req, res) => {
 	await User.find({}, { _id: 1, name: 1, username: 1, email: 1, partnerId: 1 })
 	.then((result) => {
