@@ -245,11 +245,68 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.delete('/logout', (req, res) => {
-   res.send(process.env.PAYPAL_CLIENT_ID);
+router.delete('/logout', async (req, res) => {
+	const refreshToken = req.cookies.refreshToken;
+	if (refreshToken) {
+		await User.findOne({ refresh_token: refreshToken })
+      .then(async (result) => {
+         if (result) {
+				const userId = result._id;
+				await User.updateOne(            
+					{_id: userId},
+					{
+						$set: {
+							refresh_token: null
+						}
+					}
+				);
+
+				res.clearCookie("refreshToken");
+				return res.sendStatus(200);
+         } else {
+            return res.sendStatus(204);
+         }
+      })
+      .catch((error) => {
+         console.log(error);
+      })
+	} else {
+		return res.sendStatus(204);
+	}
 });
-router.get('/token', (req, res) => {
-   res.send(process.env.PAYPAL_CLIENT_ID);
+
+
+router.get('/token', async (req, res) => {
+   const refreshToken = req.cookies.refreshToken;
+   if (refreshToken) {
+      await User.findOne({ refresh_token: refreshToken })
+      .then((result) => {
+         if (result) {
+            jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (error, decoded) => {
+               if (!error) {
+                  const accessToken = jwt.sign({
+                     userId: result._id, 
+                     name: result.name,
+                     username: result.username,
+                     email: result.email,
+                     partnerId: result.partnerId
+                  }, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'});
+
+                  res.json({ accessToken });
+               } else {
+                  return res.sendStatus(403);
+               }
+            });
+         } else {
+            return res.sendStatus(403);
+         }
+      })
+      .catch((error) => {
+         console.log(error);
+      })
+   } else {
+      return res.status(200).json({ message: "belum login" });
+   }
 });
 
 export default router;
