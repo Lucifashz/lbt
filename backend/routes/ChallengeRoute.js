@@ -5,7 +5,7 @@ import User from "../models/UserModel.js";
 
 const router = express.Router();
 
-router.post('/challenge',async (req, res) => {
+router.post('/challenge', async (req, res) => {
    const challenger = await User.findById(req.body["challenger"]);
    const challenged = await User.findById(req.body["challenged"]);
 
