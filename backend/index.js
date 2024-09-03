@@ -17,10 +17,6 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 
-app.use("/", (req, res) => {
-  res.send("Halaman home");
-});
-
 
 // challenge
 app.use(ChallengeRoute);
