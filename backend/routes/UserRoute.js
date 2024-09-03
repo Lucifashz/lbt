@@ -2,6 +2,7 @@ import express from "express";
 import User from "../models/UserModel.js";
 import jwt from "jsonwebtoken";
 import validator from "validator";
+import bcrypt from "bcryptjs";
 
 
 
