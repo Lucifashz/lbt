@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import ChallengeRoute from "./routes/ChallengeRoute.js";
+import UserRoute from "./routes/UserRoute.js";
 import "./utils/db.js";
 
 dotenv.config();
@@ -18,6 +19,10 @@ app.use(express.json());
 
 // challenge
 app.use(ChallengeRoute);
+
+// user
+app.use(UserRoute);
+
 
 
 app.use("/", (req, res) => {
