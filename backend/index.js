@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import PaypalRoute from "./routes/PaypalRoute.js";
 import ChallengeRoute from "./routes/ChallengeRoute.js";
 import "./utils/db.js";
 
@@ -16,9 +15,6 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-
-// paypal
-app.use(PaypalRoute);
 
 // challenge
 app.use(ChallengeRoute);
