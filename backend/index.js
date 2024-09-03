@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(PaypalRoute);
 
 // challenge
-app.use(PaypalRoute);
+app.use(ChallengeRoute);
 
 app.use("/db", (req, res) => {
   res.send(process.env.MONGO_URI);
