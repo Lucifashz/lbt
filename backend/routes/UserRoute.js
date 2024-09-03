@@ -13,8 +13,13 @@ router.get('/users', async (req, res) => {
 	}
 });
 
-router.get('/users/:id', (req, res) => {
-   res.send(process.env.PAYPAL_CLIENT_ID);
+router.get('/users/:id', async (req, res) => {
+   	try {
+		const user = await User.findById(req.params.id, {_id: 1, name: 1, username: 1, email: 1, partnerId: 1});
+		res.json(user);
+	} catch (error) {
+		res.status(404).json({message: error.message});
+	}
 });
 router.patch('/add-partner/:id', (req, res) => {
    res.send(process.env.PAYPAL_CLIENT_ID);
