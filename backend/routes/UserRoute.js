@@ -1,5 +1,8 @@
 import express from "express";
-import { getUsers, getUserById } from "../controllers/UsersController.js";
+import User from "../models/UserModel.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import validator from "validator";
 
 
 
