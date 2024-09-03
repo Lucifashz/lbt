@@ -294,15 +294,15 @@ router.get('/token', async (req, res) => {
 
                   res.json({ accessToken });
                } else {
-                  return res.sendStatus(403);
+                  return res.sendStatus(403).json({ message: "belum login4" });
                }
             });
          } else {
-            return res.sendStatus(403);
+            return res.sendStatus(403).json({ message: "belum login3" });
          }
       })
       .catch((error) => {
-         return res.sendStatus(403);
+         return res.sendStatus(403).json({ message: "belum login2" });
       })
    } else {
       return res.status(200).json({ message: "belum login" });
