@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Karantina&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap');
+
+
+.karantina-regular {
+   font-family: "Karantina", system-ui;
+   font-weight: 400;
+   font-style: normal;
+   line-height: 40px !important;
+}
+
+.pathway-gothic-one-regular {
+   font-family: "Pathway Gothic One", sans-serif;
+   font-weight: 400;
+   font-style: normal;
+}
