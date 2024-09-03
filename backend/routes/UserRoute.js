@@ -61,15 +61,114 @@ router.patch('/add-partner/:id', async (req, res) => {
 });
 
 
-router.patch('/delete-partner/:id', (req, res) => {
-   res.send(process.env.PAYPAL_CLIENT_ID);
+router.patch('/delete-partner/:id', async (req, res) => {
+   try {
+
+      await User.updateOne({ _id: req.params.id }, { $set: { partnerId: "" } });
+      await User.updateOne({ _id: req.body["partner"] }, { $set: { partnerId: "" } });
+
+      // mengirim pesan berhasil
+      res.status(200).json({ message: "Partner berhasil dihapus" });
+
+   } catch (error) {
+      // menampilkan error
+      res.status(500).send({ message: error.message });
+   }
 });
-router.post('/register', (req, res) => {
-   res.send(process.env.PAYPAL_CLIENT_ID);
+
+
+router.post('/register', async (req, res) => {
+	const isValidUsername = validator.isAlphanumeric(req.body["username"]);
+	const isUsernameExist = await User.findOne({ username: req.body["username"] });
+	const isEmailExist = await User.findOne({ email: req.body["email"] });
+	const isPasswordMatch = req.body["password"] === req.body["confirm-password"];
+
+	// Cek validasi yang diinput adalah email
+	const isEmail = validator.isEmail(req.body["email"]);
+	// Cek validasi yang diinput adalah string
+	function isAlphaWithSpaces(str) {
+  // Check if the string is alphabetic when spaces are removed
+		const withoutSpaces = str.replace(/\s/g, '');
+		return validator.isAlpha(withoutSpaces) && /^[a-zA-Z\s]+$/.test(str);
+	}
+	const isString = isAlphaWithSpaces(req.body["name"]);
+	// cek username hanya boleh huruf kecil
+	const isUsernameLowerCase = validator.isLowercase(req.body["username"]);
+
+	const validationErrors  = {};
+
+
+	// Cek apakah nama hanya huruf
+	if (!isString) {
+		validationErrors.nameError = "Hanya boleh huruf";
+	}
+
+	// Cek apakah username hanya huruf kecil
+	if (!isUsernameLowerCase) {
+		validationErrors.usernameLowerCaseError = "Hanya boleh huruf kecil";
+	}
+	// Cek apakah nama hanya huruf
+	if (!isString) {
+		validationErrors.nameError = "Hanya boleh huruf";
+	}
+	// Cek apakah password sudah cocok dengan confirm password
+	if (!isPasswordMatch) {
+		validationErrors.passwordMatchError = "Kata sandi tidak cocok";
+	}
+	// Cek email valid
+	if (!isEmail) {
+		validationErrors.emailValid = "Email tidak valid";
+	}
+	// Cek apakah email sudah terdaftar
+	if (isEmailExist) {
+		validationErrors.emailError = "Email sudah terdaftar";
+	}
+	// Cek apakah username sudah valid
+	if (!isValidUsername) {
+		validationErrors.usernameValidError = 'Hanya boleh huruf, angka, "_", dan "."';
+	}
+	// Cek apakah username sudah dipakai
+	if (isUsernameExist) {
+		validationErrors.usernameError = "Username sudah dipakai orang lain";
+	}
+
+	// ubah nama ke capitilize each word
+	const toTitleCase = (phrase) => {
+		return phrase
+			.toLowerCase()
+			.split(' ')
+			.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(' ');
+	};
+
+	// Cek apakah email, username, dan password sudah terpenuhi
+	if (!isEmailExist && isValidUsername && !isUsernameExist && isPasswordMatch && isEmail && isString && isUsernameLowerCase) {
+		const salt = await bcrypt.genSalt();
+		const hashPassword = await bcrypt.hash(req.body["password"], salt);
+		await User.create({
+			name: toTitleCase(req.body["name"]),
+			username: req.body["username"],
+			email: req.body["email"],
+			password: hashPassword
+		})
+		.then((result) => {
+			res.status(200).json({message: "Register berhasil"})
+		})
+		.catch((error) => {
+			console.log(error);
+			
+		})
+	} else {
+		return res.status(400).json(validationErrors);
+	}
 });
+
+
 router.post('/login', (req, res) => {
    res.send(process.env.PAYPAL_CLIENT_ID);
 });
+
+
 router.delete('/logout', (req, res) => {
    res.send(process.env.PAYPAL_CLIENT_ID);
 });
