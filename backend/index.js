@@ -32,9 +32,6 @@ app.use("/refresh", (req, res) => {
   res.send(REFRESH_TOKEN_SECRET);
 });
 
-app.use("/", (req, res) => {
-  res.send("Halaman home");
-});
 
 
 
