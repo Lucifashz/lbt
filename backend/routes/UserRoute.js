@@ -164,8 +164,84 @@ router.post('/register', async (req, res) => {
 });
 
 
-router.post('/login', (req, res) => {
-   res.send(process.env.PAYPAL_CLIENT_ID);
+router.post('/login', async (req, res) => {
+	const emailUsernameInput = req.body["email-username-input"]; 
+	const passwordInput = req.body["password"]; 
+
+	// Cek validasi yang diinput adalah email
+	const isEmail = validator.isEmail(emailUsernameInput);
+
+	if (isEmail) {
+		// Cek apakah email sudah terdaftar
+		const userWithEmail  = await User.findOne({ email: emailUsernameInput });
+		if (userWithEmail ) {
+			const isPasswordMatch = await bcrypt.compare(passwordInput, userWithEmail.password);
+			if (isPasswordMatch) {
+				const userId = userWithEmail._id;
+				const name = userWithEmail.name;
+				const username = userWithEmail.username;
+				const email = userWithEmail.email;
+				const partnerId = userWithEmail.partnerId;
+				const accessToken = jwt.sign({userId, name, username, email, partnerId}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "20s"});
+				const refreshToken = jwt.sign({userId, name, username, email, partnerId}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: "1d"});
+
+				await User.updateOne(            
+					{_id: userWithEmail._id},
+					{
+						$set: {
+							refresh_token: refreshToken
+						}
+					}
+				);
+
+				res.cookie("refreshToken", refreshToken, {
+					httpOnly: true,
+					maxAge: 24 * 60 * 60 * 1000
+				});
+
+				res.json({accessToken});
+			} else {
+				return res.status(400).json({ passwordError: "Kata sandi salah. Coba lagi." });
+			}
+		} else {
+			return res.status(400).json({ messageError: "Email belum terdaftar" });
+		}
+	} else {
+		// Cek apakah username sudah terdaftar
+		const userWithUsername = await User.findOne({ username: emailUsernameInput });
+		if (userWithUsername) {
+			const isPasswordMatch = await bcrypt.compare(passwordInput, userWithUsername.password);
+			if (isPasswordMatch) {
+				const userId = userWithUsername._id;
+				const name = userWithUsername.name;
+				const username = userWithUsername.username;
+				const email = userWithUsername.email;
+				const partnerId = userWithUsername.partnerId;
+				const accessToken = jwt.sign({userId, name, username, email, partnerId}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "20s"});
+				const refreshToken = jwt.sign({userId, name, username, email, partnerId}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: "1d"});
+
+				await User.updateOne(            
+					{_id: userWithUsername._id},
+					{
+						$set: {
+							refresh_token: refreshToken
+						}
+					}
+				);
+
+				res.cookie("refreshToken", refreshToken, {
+					httpOnly: true,
+					maxAge: 24 * 60 * 60 * 1000
+				});
+
+				res.json({accessToken});
+			} else {
+				return res.status(400).json({ passwordError: "Kata sandi salah. Coba lagi." });
+			}
+		} else {
+			return res.status(400).json({ messageError: "Username belum terdaftar" });
+		}
+	}
 });
 
 
