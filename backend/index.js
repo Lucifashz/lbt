@@ -23,18 +23,6 @@ app.use(PaypalRoute);
 // challenge
 app.use(ChallengeRoute);
 
-app.use("/db", (req, res) => {
-  res.send(process.env.MONGO_URI);
-});
-
-app.use("/access", (req, res) => {
-  res.send(ACCESS_TOKEN_SECRET);
-});
-
-// home page
-app.use("/refresh", (req, res) => {
-  res.send(REFRESH_TOKEN_SECRET);
-});
 
 app.use("/", (req, res) => {
   res.send("Halaman home");
