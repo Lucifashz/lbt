@@ -13,7 +13,10 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+<<<<<<< HEAD
     "bcryptjs": "^2.4.3",
+=======
+>>>>>>> fe399612294f9e1a54295654a73145020f4e9bf2
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

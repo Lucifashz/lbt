@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 npm install bcrypt bcryptjs cookie-parser express-validator jsonwebtoken validator dotenv express mongoose nodemon 
+=======
+npm install bcrypt cookie-parser express-validator jsonwebtoken validator dotenv express mongoose nodemon 
+>>>>>>> fe399612294f9e1a54295654a73145020f4e9bf2
