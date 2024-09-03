@@ -2,8 +2,10 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import ChallengeRoute from "./routes/ChallengeRoute.js";
+import MatchRoute from "./routes/MatchRoute.js";
 import UserRoute from "./routes/UserRoute.js";
+import ChallengeRoute from "./routes/ChallengeRoute.js";
+import PartnerRoute from "./routes/PartnerRoute.js";
 import "./utils/db.js";
 
 dotenv.config();
@@ -17,12 +19,17 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 
+// Matches
+app.use(MatchRoute);
 
-// challenge
+// Users
+app.use(UserRoute);
+
+// Challenges
 app.use(ChallengeRoute);
 
-// user
-app.use(UserRoute);
+// Partner
+app.use(PartnerRoute);
 
 
 
