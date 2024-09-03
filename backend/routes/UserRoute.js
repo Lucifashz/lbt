@@ -28,30 +28,30 @@ router.patch('/add-partner/:id', async (req, res) => {
       const user = await User.findById(req.params.id);
       const partner = await User.findById(req.body["partner"]);
 
-      // Check if partner is provided in the request
+      // mengecek req.body
       if (typeof req.body["partner"] === 'undefined') {
          return res.status(401).send({ message: "Partner tidak ditemukan" });
       }
 
-      // Prevent user from adding themselves as a partner
+      // mencegah menambahkan diri sendiri sebagai partner
       if (req.params.id === req.body["partner"]) {
          return res.status(401).send({ message: "Tidak bisa menambahkan diri kamu sebagai partner" });
       }
 
-      // Check if both users do not already have a partner
+      // mengecek kedua user apakah sudah mempunyai partner
       if (user?.partnerId || partner?.partnerId) {
          return res.status(401).send({ message: "Kamu atau keduanya sudah punya partner" });
       }
 
-      // Update both users with each other's partnerId
+      // menambahkan partner
       await User.updateOne({ _id: req.params.id }, { $set: { partnerId: req.body["partner"] } });
       await User.updateOne({ _id: req.body["partner"] }, { $set: { partnerId: req.params.id } });
 
-      // Send a success response after both updates
+      // mengirim pesan 
       res.status(200).json({ message: "Partner berhasil ditambahkan" });
 
    } catch (error) {
-      // Catch and handle any errors
+      // menangkap pesan error
       res.status(500).send({ message: error.message });
    }
 });
