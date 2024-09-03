@@ -39,6 +39,18 @@ app.get('/cookie', (req, res) => {
   res.send(response);
 });
 
+app.get('/cookie/send', (req, res) => {
+  let response;
+
+  if (req.cookies?.somecookie) {
+    response = 'cookie ada';
+  } else {
+    response = 'cookie tidak ada';
+  }
+
+  res.send(response);
+});
+
 
 // Matches
 app.use(MatchRoute);
