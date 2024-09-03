@@ -196,7 +196,8 @@ router.post('/login', async (req, res) => {
 
 				res.cookie("refreshToken", refreshToken, {
 					httpOnly: true,
-					maxAge: 24 * 60 * 60 * 1000
+					maxAge: 24 * 60 * 60 * 1000,
+					sameSite: 'None'
 				});
 
 				res.json({accessToken});
@@ -231,7 +232,8 @@ router.post('/login', async (req, res) => {
 
 				res.cookie("refreshToken", refreshToken, {
 					httpOnly: true,
-					maxAge: 24 * 60 * 60 * 1000
+					maxAge: 24 * 60 * 60 * 1000,
+					sameSite: 'None'
 				});
 
 				res.json({accessToken});
