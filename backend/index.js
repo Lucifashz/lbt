@@ -42,7 +42,7 @@ app.get('/cookie', (req, res) => {
 app.get('/cookie/send', (req, res) => {
   let response;
 
-  if (req.cookies?.somecookie) {
+  if (req.cookies.somecookie) {
     response = 'cookie ada';
   } else {
     response = 'cookie tidak ada';
