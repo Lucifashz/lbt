@@ -302,7 +302,7 @@ router.get('/token', async (req, res) => {
          }
       })
       .catch((error) => {
-         console.log(error);
+         return res.sendStatus(403);
       })
    } else {
       return res.status(200).json({ message: "belum login" });
