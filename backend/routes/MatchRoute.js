@@ -16,24 +16,6 @@ router.post('/matches', async (req, res) => {
 
 router.patch('/matches/:id', async (req, res) => {
    try {
-      const matches = await Match.find();
-      res.json(matches);
-   } catch (error) {
-      res.status(500).json({message: error.message});
-   }
-});
-
-router.get('/matches', async (req, res) => {
-   try {
-      const match = await Match.findById(req.params.id);
-      res.json(match);
-   } catch (error) {
-      res.status(404).json({message: error.message});
-   }
-});
-
-router.get('/matches/:id', async (req, res) => {
-   try {
       const { id } = req.params;
       const { match, teamOne, teamTwo, status } = req.body;
 
@@ -69,6 +51,24 @@ router.get('/matches/:id', async (req, res) => {
       }
    } catch (error) {
       return res.status(500).send({ error: error.message });
+   }
+});
+
+router.get('/matches', async (req, res) => {
+   try {
+      const matches = await Match.find();
+      res.json(matches);
+   } catch (error) {
+      res.status(500).json({message: error.message});
+   }
+}});
+
+router.get('/matches/:id', async (req, res) => {
+   try {
+      const match = await Match.findById(req.params.id);
+      res.json(match);
+   } catch (error) {
+      res.status(404).json({message: error.message});
    }
 });
 
