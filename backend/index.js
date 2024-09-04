@@ -62,7 +62,7 @@ app.get('/cookie/delete', (req, res) => {
     res.clearCookie("somecookie");
     response = 'cookie telah dihapus';
   } else {
-    response = 'cookie tidak dihapus';
+    response = 'cookie tidakdihapus';
   }
 
   res.send(response);
