@@ -257,27 +257,30 @@ router.get('/delete-cookie', async (req, res) => {
 });
 
 router.delete('/logout', async (req, res) => {
-	const refreshToken = req.cookies?.refreshToken;
+	const refreshToken = req.cookies.refreshToken;
 	if (refreshToken) {
 		await User.findOne({ refresh_token: refreshToken })
-		.then(async (result) => {
-			if (result) {
+      .then(async (result) => {
+         if (result) {
 				const userId = result._id;
-				await User.updateOne({_id: userId},
-						     {
-							     $set: {refresh_token: null}
-						     }
-						    );
-		
+				await User.updateOne(            
+					{_id: userId},
+					{
+						$set: {
+							refresh_token: null
+						}
+					}
+				);
+
 				res.clearCookie("refreshToken");
 				return res.sendStatus(200);
-		         } else {
-		            return res.sendStatus(204);
-		         }
-		      })
-		      .catch((error) => {
-		         console.log(error);
-		      })
+         } else {
+            return res.sendStatus(204);
+         }
+      })
+      .catch((error) => {
+         console.log(error);
+      })
 	} else {
 		return res.sendStatus(204);
 	}
