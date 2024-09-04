@@ -248,14 +248,6 @@ router.post('/login', async (req, res) => {
 	}
 });
 
-router.get('/delete-cookie', async (req, res) => {
-    res.clearCookie("refreshToken");
-  if (req.cookies?.refreshToken) {
-    res.clearCookie("refreshToken");
-  }
-
-});
-
 router.delete('/logout', async (req, res) => {
 	const refreshToken = req.cookies.refreshToken;
 	if (refreshToken) {
@@ -271,8 +263,9 @@ router.delete('/logout', async (req, res) => {
 						}
 					}
 				);
-
-				res.clearCookie("refreshToken");
+		 
+				res.clearCookie("refreshToken", {httpOnly: true, secure: true, sameSite: 'None', path: "/"});
+		 
 				return res.sendStatus(200);
          } else {
             return res.sendStatus(204);
