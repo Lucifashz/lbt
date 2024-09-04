@@ -32,7 +32,11 @@ app.get('/cookie', (req, res) => {
   if (req.cookies?.somecookie) {
     response = 'Same cookie: A cookie received and the same sent to client';
   } else {
-    res.cookie('somecookie', 'cookie text');
+    res.cookie('somecookie', 'cookie text', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None'
+});
     response = 'New cookie: A new cookie created and sent to the client';
   }
 
