@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 import {Modal, ModalContent, ModalBody, Button, useDisclosure} from "@nextui-org/react";
 
 
@@ -30,8 +31,20 @@ export default function PartnerCard(props) {
          "receiver": props.player._id
       })
       .then((response) => { 
+         Swal.fire({
+               title: 'Berhasil!',  
+               text: `Kamu berhasil mengirim ajakan untuk menjadi partner`,  
+               icon: 'success',  
+               confirmButtonText: 'OK'
+         });
       })
       .catch((error) => { 
+         Swal.fire({
+               title: 'Gagal!',  
+               text: `Gagal mengirim ajakan untuk menjadi partner!`,  
+               icon: 'error',  
+               confirmButtonText: 'OK'
+         });
       })
    }
 
