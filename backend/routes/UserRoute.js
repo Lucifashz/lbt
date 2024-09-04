@@ -249,7 +249,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/delete-cookie', async (req, res) => {
-
+    res.clearCookie("refreshToken");
   if (req.cookies?.refreshToken) {
     res.clearCookie("refreshToken");
   }
