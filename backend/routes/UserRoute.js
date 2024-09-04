@@ -193,10 +193,12 @@ router.post('/login', async (req, res) => {
 						}
 					}
 				);
-
+			
 				res.cookie("refreshToken", refreshToken, {
 					httpOnly: true,
-					maxAge: 24 * 60 * 60 * 1000
+					maxAge: 24 * 60 * 60 * 1000,
+					secure: true,
+    					sameSite: 'None'
 				});
 
 				res.json({accessToken});
@@ -231,9 +233,11 @@ router.post('/login', async (req, res) => {
 
 				res.cookie("refreshToken", refreshToken, {
 					httpOnly: true,
-					maxAge: 24 * 60 * 60 * 1000
+					maxAge: 24 * 60 * 60 * 1000,
+					secure: true,
+    					sameSite: 'None'
 				});
-
+				
 				res.json({accessToken});
 			} else {
 				return res.status(400).json({ passwordError: "Kata sandi salah. Coba lagi." });
