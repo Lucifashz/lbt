@@ -138,9 +138,11 @@ export default function App() {
       </TableHeader>
       <TableBody items={items}>
         {(item) => (
+          item._id !== playerLogin.userId ?
           <TableRow key={item.name}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey, playerLogin)}</TableCell>}
           </TableRow>
+          : ""
         )}
       </TableBody>
     </Table>
