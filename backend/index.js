@@ -59,7 +59,7 @@ app.get('/cookie/delete', (req, res) => {
   let response;
 
   if (req.cookies?.somecookie) {
-    res.clearCookie("refreshToken");
+    res.clearCookie("somecookie");
     response = 'cookie dihapus';
   } else {
     response = 'cookie tidak ada';
