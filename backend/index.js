@@ -59,7 +59,7 @@ app.get('/cookie/delete', (req, res) => {
   let response;
 
   if (req.cookies?.somecookie) {
-    res.clearCookie("somecookie", {path: "/"});
+    res.clearCookie("somecookie", {httpOnly: true, secure: true, sameSite: 'None', path: "/"});
     response = 'cookie telah dihapus';
   } else {
     response = 'cookie tidak ada';
