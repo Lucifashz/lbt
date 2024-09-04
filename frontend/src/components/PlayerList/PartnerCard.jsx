@@ -30,18 +30,18 @@ export default function PartnerCard(props) {
          "sender": props.playerLogin.userId,
          "receiver": props.player._id
       })
-      .then((response) => { 
+      .then((response) => {
          Swal.fire({
                title: 'Berhasil!',  
-               text: `Kamu berhasil mengirim ajakan untuk menjadi partner`,  
+               text: `Kamu berhasil mengirim ajakan untuk bertanding`,  
                icon: 'success',  
                confirmButtonText: 'OK'
          });
       })
       .catch((error) => { 
-         Swal.fire({
+            Swal.fire({
                title: 'Gagal!',  
-               text: `Gagal mengirim ajakan untuk menjadi partner!`,  
+               text: `Gagal`,  
                icon: 'error',  
                confirmButtonText: 'OK'
          });
