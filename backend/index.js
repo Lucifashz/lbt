@@ -59,7 +59,7 @@ app.get('/cookie/delete', (req, res) => {
   let response;
 
   if (req.cookies?.somecookie) {
-    res.clearCookie("somecookie",{domain: "lbt-api.vercel.app" , path: "/"});
+    res.clearCookie("somecookie", {path: "/"});
     response = 'cookie telah dihapus';
   } else {
     response = 'cookie tidak ada';
