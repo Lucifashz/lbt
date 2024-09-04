@@ -60,9 +60,9 @@ app.get('/cookie/delete', (req, res) => {
 
   if (req.cookies?.somecookie) {
     res.clearCookie("somecookie");
-    response = 'cookie dihapus ya';
+    response = 'cookie telah dihapus';
   } else {
-    response = 'cookie tidak ada';
+    response = 'cookie tidak dihapus';
   }
 
   res.send(response);
