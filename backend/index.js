@@ -55,11 +55,11 @@ app.get('/cookie/send', (req, res) => {
   res.send(response);
 });
 
-app.get('/cookie/delete', (req, res) => {
+app.post('/cookie/delete', (req, res) => {
   let response;
 
   if (req.cookies?.somecookie) {
-    res.clearCookie("somecookie",{domain: "lbt-api.vercel.app" , path: "/"});
+    res.clearCookie("somecookie",{domain: "https://lbt-api.vercel.app" , path: "/"});
     response = 'cookie telah dihapus';
   } else {
     response = 'cookie tidak ada';
