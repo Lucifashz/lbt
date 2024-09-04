@@ -55,7 +55,7 @@ app.get('/cookie/send', (req, res) => {
   res.send(response);
 });
 
-app.post('/cookie/delete', (req, res) => {
+app.get('/cookie/delete', (req, res) => {
   let response;
 
   if (req.cookies?.somecookie) {
