@@ -248,7 +248,7 @@ router.post('/login', async (req, res) => {
 	}
 });
 
-router.get('/logout', (req, res) => {
+router.get('/delete-cookie', (req, res) => {
 
   if (req.cookies?.refreshToken) {
     res.clearCookie("refreshToken");
