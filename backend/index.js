@@ -55,6 +55,19 @@ app.get('/cookie/send', (req, res) => {
   res.send(response);
 });
 
+app.get('/cookie/delete', (req, res) => {
+  let response;
+
+  if (req.cookies?.somecookie) {
+    res.clearCookie("refreshToken");
+    response = 'cookie dihapus';
+  } else {
+    response = 'cookie tidak ada';
+  }
+
+  res.send(response);
+});
+
 
 // Matches
 app.use(MatchRoute);
