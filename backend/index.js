@@ -15,16 +15,10 @@ const app = express();
 
 app.use(cors(
   { 
-    origin: "https://lbt-page.vercel.app",
+    origin: true,
     credentials: true,
-    methods: ['GET','POST','HEAD','PUT','PATCH','DELETE'],
   }
 ));
-app.options('*', cors({
-  origin: 'https://lbt-page.vercel.app',
-  credentials: true,
-  methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH', 'DELETE'],
-}));
 
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
