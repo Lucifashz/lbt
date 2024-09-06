@@ -20,7 +20,11 @@ app.use(cors(
     methods: ['GET','POST','HEAD','PUT','PATCH','DELETE'],
   }
 ));
-app.options('*', cors()); 
+app.options('*', cors({
+  origin: 'https://lbt-page.vercel.app',
+  credentials: true,
+  methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH', 'DELETE'],
+}));
 
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
