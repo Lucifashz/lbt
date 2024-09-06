@@ -28,7 +28,7 @@ export default function MatchDetail() {
       }
 
       const refreshToken = async () => {
-         await axios.get("https://lbt-api.vercel.app//token")
+         await axios.get("https://lbt-api.vercel.app/token")
          .then((response) => {
             setToken(response.data.accessToken);
             const decode = jwtDecode(response.data.accessToken);
