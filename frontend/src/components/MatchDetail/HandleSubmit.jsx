@@ -17,7 +17,7 @@ export default function HandleSubmit(props) {
 
 const selisih = Math.abs(props.scoreP1 - props.scoreP2);
 const deuce = (props.scoreP1 >= 20 && props.scoreP2 >= 20 && selisih !== 2);
-const gameover = ((x === 21 || y === 21) && !deuce);
+const gameover = ((props.scoreP1 === 21 || props.scoreP2 === 21) && !deuce);
 
 
    return (
