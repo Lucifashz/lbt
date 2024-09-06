@@ -63,7 +63,7 @@ router.get('/matches', async (req, res) => {
    }
 });
 
-router.get('/match/:id', async (req, res) => {
+router.get('/matches/:id', async (req, res) => {
    try {
       const match = await Match.findById(req.params.id);
       res.json(match);
