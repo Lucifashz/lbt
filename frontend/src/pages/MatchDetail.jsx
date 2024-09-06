@@ -23,7 +23,7 @@ export default function MatchDetail() {
 
    React.useEffect(() => {
       const getMatchById = async() => {
-         const response = await axios.get(`https://lbt-api.vercel.app//match/${id}`);
+         const response = await axios.get(`https://lbt-api.vercel.app/matches/${id}`);
          setMatch(response.data);
       }
 
