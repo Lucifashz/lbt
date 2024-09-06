@@ -2,6 +2,7 @@ import React from "react";
 import {Avatar, Card, CardBody} from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import NavbarHeader from "../Navbar/NavbarHeader";
+import PlayerPartner from "./PlayerPartner";
 
 
 export default function Player(props) {
