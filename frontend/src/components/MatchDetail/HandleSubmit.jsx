@@ -15,14 +15,14 @@ export default function HandleSubmit(props) {
       })
    }
 
-let selisih = Math.abs(props.scoreP1 - props.scoreP2);
-
-console.log(selisih === 2 || props.scoreP1 > 29 || props.scoreP2 > 29 ? " a" : "b");
+const selisih = Math.abs(props.scoreP1 - props.scoreP2);
+const deuce = (props.scoreP1 >= 20 && props.scoreP2 >= 20 && selisih !== 2);
+const gameover = ((x === 21 || y === 21) && !deuce);
 
 
    return (
       <>
-         {selisih === 2 || props.scoreP1 > 29 || props.scoreP2 > 29 ? 
+         {gameover ? 
          <Button onClick={updateMatch} className="bg-cyan-950 text-white">Selesaikan pertandingan</Button>
          : ""}
       </>
