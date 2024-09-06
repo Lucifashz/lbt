@@ -13,12 +13,11 @@ dotenv.config();
 const app = express();
 
 
-app.use(cors(
-  { 
-    origin: true,
-    credentials: true,
-  }
-));
+app.use(cors({
+  origin: 'https://lbt-page.vercel.app',
+  credentials: true,
+  methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+}));
 
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
