@@ -16,12 +16,18 @@ export default function TablePlayers() {
   const [token, setToken] = React.useState("");
   const [expire, setExpire] = React.useState("");
   const [search, setSearch] = React.useState("");
-  const [update, setUpdate] = React.useState(false);
+  const [update, setUpdate] = React.useState(0);
 
   React.useEffect(() => {
+      const updateData = setInterval(() => {
+         setUpdate(update => update + 1)
+      }, 1000);
+
+
       refreshToken();
       getPlayers();
-  }, [search]);
+      return () => clearInterval(updateData);
+  }, [search, update]);
 
   // Agar axios dapat membaca cookies
   axios.defaults.withCredentials = true;
