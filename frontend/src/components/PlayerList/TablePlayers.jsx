@@ -21,7 +21,7 @@ export default function TablePlayers() {
   React.useEffect(() => {
       refreshToken();
       getPlayers();
-  }, [search, update]);
+  }, [search]);
 
   // Agar axios dapat membaca cookies
   axios.defaults.withCredentials = true;
@@ -33,7 +33,6 @@ export default function TablePlayers() {
         const decode = jwtDecode(response.data.accessToken);
         setPlayerLogin(decode);
         setExpire(decode.exp);
-        setUpdate(true);
       }).catch((error) => {
         if (error.response) {
         }
@@ -44,7 +43,6 @@ export default function TablePlayers() {
     await axios.get('https://lbt-api.vercel.app/users')
       .then((response) => { 
           setPlayers(response.data);
-          setUpdate(true);
       })
       .catch((error) => { 
           console.log(error.response);
@@ -96,9 +94,6 @@ export default function TablePlayers() {
         setSearch(event.target.value);
     };
 
-  if (!update) {
-    return <div></div>
-  }
   
   return (
     <Table 
