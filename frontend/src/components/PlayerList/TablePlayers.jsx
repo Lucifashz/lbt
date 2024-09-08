@@ -16,11 +16,12 @@ export default function App() {
   const [token, setToken] = React.useState("");
   const [expire, setExpire] = React.useState("");
   const [search, setSearch] = React.useState("");
+  const [update, setUpdate] = React.usestate(false);
 
   React.useEffect(() => {
       refreshToken();
       getPlayers();
-  }, [search]);
+  }, [search, update]);
 
   // Agar axios dapat membaca cookies
   axios.defaults.withCredentials = true;
@@ -32,6 +33,7 @@ export default function App() {
         const decode = jwtDecode(response.data.accessToken);
         setPlayerLogin(decode);
         setExpire(decode.exp);
+        setUpdate(prev => !prev);
       }).catch((error) => {
         if (error.response) {
         }
@@ -42,6 +44,7 @@ export default function App() {
     await axios.get('https://lbt-api.vercel.app/users')
       .then((response) => { 
           setPlayers(response.data);
+          setUpdate(prev => !prev);
       })
       .catch((error) => { 
           console.log(error.response);
