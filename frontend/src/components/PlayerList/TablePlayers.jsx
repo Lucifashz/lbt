@@ -20,7 +20,7 @@ export default function App() {
   React.useEffect(() => {
       refreshToken();
       getPlayers();
-  }, [search, update]);
+  }, [search, players]);
 
   // Agar axios dapat membaca cookies
   axios.defaults.withCredentials = true;
@@ -66,7 +66,7 @@ export default function App() {
   }, [page, players]);
 
 
-    const renderCellLogin = React.useCallback((player, columnKey, login) => {
+    const renderCell = React.useCallback((player, columnKey, login) => {
       const cellValue = player[columnKey];
       switch (columnKey) {
         case "actions":
@@ -79,22 +79,6 @@ export default function App() {
               }
 
               {player._id !== login.partnerId && login.userId && player.partnerId === "" && login.partnerId === "" ? <PartnerCard player={player} playerLogin={login}/> : ""}
-              <Link to={`/users/${player._id}`} className="py-2.5 px-5 text-sm font-medium rounded-lg bg-cyan-950 text-white shadow-sm hover:bg-cyan-900">
-                Lihat Profil
-              </Link>
-            </div>
-          );
-        default:
-          return cellValue;
-      }
-  }, []);
-
-  const renderCell = React.useCallback((player, columnKey) => {
-      const cellValue = player[columnKey];
-      switch (columnKey) {
-        case "actions":
-          return (
-            <div className="relative flex justify-end items-center gap-2">
               <Link to={`/users/${player._id}`} className="py-2.5 px-5 text-sm font-medium rounded-lg bg-cyan-950 text-white shadow-sm hover:bg-cyan-900">
                 Lihat Profil
               </Link>
@@ -154,13 +138,10 @@ export default function App() {
       </TableHeader>
       <TableBody items={items}>
         {(item) => (
-          item._id !== playerLogin.userId && playerLogin ?
+          item._id !== playerLogin.userId ?
           <TableRow key={item.name}>
-            {(columnKey) => <TableCell>{renderCellLogin(item, columnKey, playerLogin)}</TableCell>}
-          </TableRow> : 
-          <TableRow key={item.name}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
-          </TableRow> 
+            {(columnKey) => <TableCell>{renderCell(item, columnKey, playerLogin)}</TableCell>}
+          </TableRow> :  ""
         )}
       </TableBody>
     </Table>
