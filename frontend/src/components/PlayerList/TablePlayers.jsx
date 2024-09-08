@@ -98,8 +98,21 @@ export default function App() {
       aria-label="Example table with client side pagination"
       topContent={
         <div>
+          <p>{playerLogin.userId ? "ada" : "tidak ada"}</p>
           <div className="relative z-0" >
-            <p>{playerLogin.name ? "ada" : "tidak ada"}</p>
+              <input type="text" id="search" className={`block px-2.5 pb-2.5 pt-4 w-full text-sm bg-transparent rounded-lg border-1 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`} placeholder=" " name="search" onChange={handleSearch} value={search} required/>
+              <label htmlFor="search" className={`absolute text-sm  duration-300 transform -translate-y-4 scale-75 top-2 ${search ? "z-10" : "-z-10"} origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 peer-focus:z-10 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1`}>Cari pemain berdasarkan nama atau username</label>
+                {
+                    search ?
+                    <button onClick={() => setSearch("")} type="button" className="absolute inset-y-0 end-0 flex items-center z-20 px-3 cursor-pointer text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600">
+                      <X className="size-3.5"/>
+                    </button> :
+                    <div className="absolute inset-y-0 end-0 flex items-center z-20 px-3 text-gray-400 rounded-e-md focus:outline-none focus:text-blue-600">
+                      <Search className="size-3.5"/>
+                    </div>
+                }
+          </div>
+           <div className="relative z-0" >
               <input type="text" id="search" className={`block px-2.5 pb-2.5 pt-4 w-full text-sm bg-transparent rounded-lg border-1 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer`} placeholder=" " name="search" onChange={handleSearch} value={search} required/>
               <label htmlFor="search" className={`absolute text-sm  duration-300 transform -translate-y-4 scale-75 top-2 ${search ? "z-10" : "-z-10"} origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 peer-focus:z-10 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1`}>Cari pemain berdasarkan nama atau username</label>
                 {
