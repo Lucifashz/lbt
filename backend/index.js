@@ -14,7 +14,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: true,
+  origin: 'https://lbt-page.vercel.app',
   credentials: true,
   methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
 }));
