@@ -10,7 +10,7 @@ import { X, Search  } from 'lucide-react';
 
 
 
-export default function App() {
+export default function TablePlayers() {
   const [players, setPlayers] = React.useState(users);
   const [playerLogin, setPlayerLogin] = React.useState({});
   const [token, setToken] = React.useState("");
