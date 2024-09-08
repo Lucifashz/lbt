@@ -82,7 +82,6 @@ export default function TablePlayers() {
               <Link to={`/users/${player._id}`} className="py-2.5 px-5 text-sm font-medium rounded-lg bg-cyan-950 text-white shadow-sm hover:bg-cyan-900">
                 Lihat Profil
               </Link>
-              <p>{login.userId}</p>
             </div>
           );
         default:
