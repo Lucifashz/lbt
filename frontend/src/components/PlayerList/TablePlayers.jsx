@@ -20,7 +20,7 @@ export default function App() {
   React.useEffect(() => {
       refreshToken();
       getPlayers();
-  }, [search, players]);
+  }, [search]);
 
   // Agar axios dapat membaca cookies
   axios.defaults.withCredentials = true;
