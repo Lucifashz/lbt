@@ -65,8 +65,6 @@ export default function TablePlayers() {
     return searchByNameOrUsername.slice(start, end);
   }, [page, players]);
 
-  console.log(playerLogin)
-
 
     const renderCell = React.useCallback((player, columnKey, login) => {
       const cellValue = player[columnKey];
