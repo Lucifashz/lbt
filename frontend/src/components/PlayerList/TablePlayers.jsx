@@ -65,6 +65,8 @@ export default function TablePlayers() {
     return searchByNameOrUsername.slice(start, end);
   }, [page, players]);
 
+  console.log(playerLogin)
+
 
     const renderCell = React.useCallback((player, columnKey, login) => {
       const cellValue = player[columnKey];
@@ -82,7 +84,6 @@ export default function TablePlayers() {
               <Link to={`/users/${player._id}`} className="py-2.5 px-5 text-sm font-medium rounded-lg bg-cyan-950 text-white shadow-sm hover:bg-cyan-900">
                 Lihat Profil
               </Link>
-              <p>{playerLogin.userId ? "ada" : "tidak ada"}</p>
             </div>
           );
         default:
