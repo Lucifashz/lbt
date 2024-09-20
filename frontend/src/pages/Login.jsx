@@ -47,10 +47,17 @@ export default function Login() {
       });
    }
 
-   const handleChange = (e) => {
+   const handleChangeUsername = (e) => {
       const  {name, value} = e.target;
       setPost((post) => {
          return {...post, [name]: value.toLowerCase()}
+      });
+   }
+
+   const handleChangePassword = (e) => {
+      const  {name, value} = e.target;
+      setPost((post) => {
+         return {...post, [name]: value}
       });
    }
 
@@ -65,7 +72,7 @@ export default function Login() {
                   type="text"
                   text="Email atau username"
                   inputValue={post["email-username-input"]}
-                  handleChange={handleChange}
+                  handleChange={handleChangeUsername}
                   message={message.messageError ? message.messageError : ""}
                >
                   {
@@ -81,7 +88,7 @@ export default function Login() {
                   type={hidePassword ? "password" : "text"}
                   text="Kata sandi"
                   inputValue={post["password"]}
-                  handleChange={handleChange}
+                  handleChange={handleChangePassword}
                   message={message.passwordError ? message.passwordError : ""}
                > 
                   {
