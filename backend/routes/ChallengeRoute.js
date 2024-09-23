@@ -121,7 +121,7 @@ router.post('/challenge', async (req, res) => {
                })
          }
       } else {
-         return res.status(404).json({messageError: `Pemain tersebut ada tanding, input jam pertandingan harus lebih dari 3 jam. ${errorDate}. ${new Date(req.body["matchDate"])}`});
+         return res.status(404).json({messageError: `Pemain tersebut ada tanding, input jam pertandingan harus lebih dari 3 jam. ${errorDate}`});
       }
 });
 
