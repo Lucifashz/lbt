@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {Dropdown, DropdownTrigger, DropdownMenu, DropdownSection, DropdownItem, Button, Avatar, ListboxItem } from "@nextui-org/react";
 import img from "../../assets/imgs/profile-picture-5.jpg";
-import { LogOut, UserRound, Swords, UsersRound  } from 'lucide-react';
+import { LogOut, UserRound, Swords, UsersRound, Scroll } from 'lucide-react';
 
 export default function LoggedAvatar(props) {
 
@@ -30,6 +30,19 @@ export default function LoggedAvatar(props) {
                      <Link className="flex items-center gap-2 py-1.5 px-2"  to="/profile">
                         <UserRound className="size-4"/>
                         Profil
+                     </Link>
+                  }
+                  className="block p-0"
+               >
+               </DropdownItem>
+               <DropdownItem
+                  key="matches"
+                  textValue="History Pertandingan"
+                  startContent=
+                  {
+                     <Link className="flex items-center gap-2 py-1.5 px-2"  to="/matches/by-user">
+                        <Scroll className="size-4"/>
+                        Riwayat Pertandingan
                      </Link>
                   }
                   className="block p-0"
