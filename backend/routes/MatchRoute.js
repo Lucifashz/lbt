@@ -72,5 +72,20 @@ router.get('/matches/:id', async (req, res) => {
    }
 });
 
+router.get('/matches/by-user/:userId', async (req, res) => {
+   await Match.find(
+      { $or: 
+         [ 
+            { "matchOne.teamOne.playerOneId": req.params.userId }, { "matchOne.teamOne.playerTwoId":  req.params.userId  },
+            { "matchOne.teamTwo.playerOneId": req.params.userId }, { "matchOne.teamTwo.playerTwoId":  req.params.userId  }
+         ] 
+      }
+   ).then((result) => {
+      res.json(result);
+   }).catch((error) => {
+      res.status(500).json({message: error.message});
+   });
+})
+
 
 export default router;
