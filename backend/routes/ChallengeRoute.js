@@ -58,7 +58,7 @@ router.post('/challenge', async (req, res) => {
          timeStyle: 'long',
          timeZone: 'Asia/Jakarta',
       }).format(errorResults.match.matchDate)
-      
+
       const results = filteredMatch.map(match => {
          const matchDate = new Date(match.matchDate);
 
@@ -73,51 +73,51 @@ router.post('/challenge', async (req, res) => {
       // mengecek tanggal
       if (results) {
             const challenger = await User.findById(req.body["challenger"]);
-            const challenged = await User.findById(req.body["challenged"]);
+   const challenged = await User.findById(req.body["challenged"]);
 
-            if (req.body["matchType"] === "double") {
-               if (challenger.partnerId !== "" && challenged.partnerId !== "" ) {
-                  await Challenge.create({
-                     challenger: {
-                        id: req.body["challenger"],
-                        partnerId: req.body["challengerPartner"]
-                     },
-                     challenged: {
-                        id: req.body["challenged"],
-                        partnerId: req.body["challengedPartner"]
-                     },
-                     matchReferee: req.body["matchReferee"],
-                     matchType: req.body["matchType"],
-                     matchDate: req.body["matchDate"]
-                  })
-                  .then((result) => {
-                     res.status(201).json(result)
-                  })
-                  .catch((error) => {
-                     res.status(404).json({message: error.message});
-                  })
-               } else {
-                  return res.status(400).json({ messageError: "Player ini atau Kamu belum punya partner, tidak bisa pertandingan ganda" });
-               }
-            } else if (req.body["matchType"] === "single") {
-                  await Challenge.create({
-                     challenger: {
-                        id: req.body["challenger"]
-                     },
-                     challenged: {
-                        id: req.body["challenged"]
-                     },
-                     matchReferee: req.body["matchReferee"],
-                     matchType: req.body["matchType"],
-                     matchDate: req.body["matchDate"]
-                  })
-                  .then((result) => {
-                     res.status(201).json(result)
-                  })
-                  .catch((error) => {
-                     res.status(404).json({message: error.message});
-                  })
-            }
+   if (req.body["matchType"] === "double") {
+      if (challenger.partnerId !== "" && challenged.partnerId !== "" ) {
+         await Challenge.create({
+            challenger: {
+               id: req.body["challenger"],
+               partnerId: req.body["challengerPartner"]
+            },
+            challenged: {
+               id: req.body["challenged"],
+               partnerId: req.body["challengedPartner"]
+            },
+            matchReferee: req.body["matchReferee"],
+            matchType: req.body["matchType"],
+            matchDate: req.body["matchDate"]
+         })
+         .then((result) => {
+            res.status(201).json(result)
+         })
+         .catch((error) => {
+            res.status(404).json({message: error.message});
+         })
+      } else {
+         return res.status(400).json({ messageError: "Player ini atau Kamu belum punya partner, tidak bisa pertandingan ganda" });
+      }
+   } else if (req.body["matchType"] === "single") {
+         await Challenge.create({
+            challenger: {
+               id: req.body["challenger"]
+            },
+            challenged: {
+               id: req.body["challenged"]
+            },
+            matchReferee: req.body["matchReferee"],
+            matchType: req.body["matchType"],
+            matchDate: req.body["matchDate"]
+         })
+         .then((result) => {
+            res.status(201).json(result)
+         })
+         .catch((error) => {
+            res.status(404).json({message: error.message});
+         })
+   }
       } else {
          return res.status(404).json({messageError: `Pemain tersebut ada tanding, input jam harus lebih dari 3 jam. ${errorDate}`});
       }
