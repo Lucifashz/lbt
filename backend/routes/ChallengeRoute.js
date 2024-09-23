@@ -72,54 +72,54 @@ router.post('/challenge', async (req, res) => {
 
       // mengecek tanggal
       if (results) {
-            const challenger = await User.findById(req.body["challenger"]);
-   const challenged = await User.findById(req.body["challenged"]);
-
-   if (req.body["matchType"] === "double") {
-      if (challenger.partnerId !== "" && challenged.partnerId !== "" ) {
-         await Challenge.create({
-            challenger: {
-               id: req.body["challenger"],
-               partnerId: req.body["challengerPartner"]
-            },
-            challenged: {
-               id: req.body["challenged"],
-               partnerId: req.body["challengedPartner"]
-            },
-            matchReferee: req.body["matchReferee"],
-            matchType: req.body["matchType"],
-            matchDate: req.body["matchDate"]
-         })
-         .then((result) => {
-            res.status(201).json(result)
-         })
-         .catch((error) => {
-            res.status(404).json({message: error.message});
-         })
+         const challenger = await User.findById(req.body["challenger"]);
+         const challenged = await User.findById(req.body["challenged"]);
+      
+         if (req.body["matchType"] === "double") {
+            if (challenger.partnerId !== "" && challenged.partnerId !== "" ) {
+               await Challenge.create({
+                  challenger: {
+                     id: req.body["challenger"],
+                     partnerId: req.body["challengerPartner"]
+                  },
+                  challenged: {
+                     id: req.body["challenged"],
+                     partnerId: req.body["challengedPartner"]
+                  },
+                  matchReferee: req.body["matchReferee"],
+                  matchType: req.body["matchType"],
+                  matchDate: req.body["matchDate"]
+               })
+               .then((result) => {
+                  res.status(201).json(result)
+               })
+               .catch((error) => {
+                  res.status(404).json({message: error.message});
+               })
+            } else {
+               return res.status(400).json({ messageError: "Player ini atau Kamu belum punya partner, tidak bisa pertandingan ganda" });
+            }
+         } else if (req.body["matchType"] === "single") {
+               await Challenge.create({
+                  challenger: {
+                     id: req.body["challenger"]
+                  },
+                  challenged: {
+                     id: req.body["challenged"]
+                  },
+                  matchReferee: req.body["matchReferee"],
+                  matchType: req.body["matchType"],
+                  matchDate: req.body["matchDate"]
+               })
+               .then((result) => {
+                  res.status(201).json(result)
+               })
+               .catch((error) => {
+                  res.status(404).json({message: error.message});
+               })
+         }
       } else {
-         return res.status(400).json({ messageError: "Player ini atau Kamu belum punya partner, tidak bisa pertandingan ganda" });
-      }
-   } else if (req.body["matchType"] === "single") {
-         await Challenge.create({
-            challenger: {
-               id: req.body["challenger"]
-            },
-            challenged: {
-               id: req.body["challenged"]
-            },
-            matchReferee: req.body["matchReferee"],
-            matchType: req.body["matchType"],
-            matchDate: req.body["matchDate"]
-         })
-         .then((result) => {
-            res.status(201).json(result)
-         })
-         .catch((error) => {
-            res.status(404).json({message: error.message});
-         })
-   }
-      } else {
-         return res.status(404).json({messageError: `Pemain tersebut ada tanding, input jam pertandingan harus lebih dari 3 jam. ${errorDate}`});
+         return res.status(404).json({messageError: `Pemain tersebut ada tanding, input jam pertandingan harus lebih dari 3 jam. ${errorDate}. ${new Date(req.body["matchDate"])}`});
       }
 });
 
