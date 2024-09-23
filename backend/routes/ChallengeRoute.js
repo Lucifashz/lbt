@@ -45,6 +45,20 @@ router.post('/challenge', async (req, res) => {
          }
       }).filter(match => match != null);
 
+      const errorResults = filteredMatch.map(match => {
+         const matchDate = new Date(match.matchDate);
+
+         const compareDate = new Date(req.body["matchDate"]) - matchDate;
+
+         return { match, compareDate }
+      }).filter(match => match != null).sort((a, b) => a.compareDate - b.compareDate)[0];
+
+      const errorDate =  new Intl.DateTimeFormat('id-ID', {
+         dateStyle: 'full',
+         timeStyle: 'long',
+         timeZone: 'Asia/Jakarta',
+      }).format(errorResults.match.matchDate)
+      
       const results = filteredMatch.map(match => {
          const matchDate = new Date(match.matchDate);
 
@@ -105,7 +119,7 @@ router.post('/challenge', async (req, res) => {
                   })
             }
       } else {
-         return res.status(404).json({message: "failed"});
+         return res.status(404).json({messageError: `Pemain tersebut ada tanding, input jam harus lebih dari 3 jam. ${errorDate}`});
       }
 });
 
