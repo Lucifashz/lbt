@@ -106,7 +106,7 @@ const updatePlayersItem2 = (players) => {
    setPlayersItem2(newPlayers);
 };
 
-   console.log(`${matchDate} ${matchTime}`)
+   console.log(`${matchTime}`)
 
 
       return (
