@@ -1,10 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import Home from "./pages/Home";
 import MatchList from "./pages/MatchList";
-import MatchListByUser from "./pages/MatchListByUser";
 import MatchDetail from "./pages/MatchDetail";
 import PlayerList from "./pages/PlayerList";
 import PlayerDetail from "./pages/PlayerDetail";
@@ -21,21 +19,16 @@ export default function App() {
    const [matches, setMatches] = React.useState([]);
    const [update, setUpdate] = React.useState(0);
    const [msg, setMsg] = React.useState("");
-   const [profile, setProfile] = React.useState("");
 
    React.useEffect(() => {
       const getMatches = async() => {
-         const response = await axios.get('http://localhost:3000/matches');
+         const response = await axios.get('https://lbt-api.vercel.app/matches');
          setMatches(response.data);
       }
 
       const refreshToken = async () => {
-         await axios.get("http://localhost:3000/token")
-         .then(response => {
-            const decode = jwtDecode(response.data.accessToken);
-            setProfile(decode);
-            setMsg(response.data.message)
-         })
+         await axios.get("https://lbt-api.vercel.app/token")
+         .then(response => setMsg(response.data.message))
       }
 
       const updateData = setInterval(() => {
@@ -43,7 +36,7 @@ export default function App() {
       }, 1000);
 
       getMatches();
-      refreshToken();
+      refreshToken()
 
       return () => clearInterval(updateData);
    }, [update])
@@ -65,7 +58,6 @@ export default function App() {
             </Route>
             <Route path="/users/:id" element={<PlayerDetail/>} />
             <Route path="/matches" element={<MatchList matches={matches}/>} />
-            <Route path="/matches/by-user" element={<MatchListByUser profile={profile}/>} />
             <Route path="/matches/:id" element={<MatchDetail/>} />
          </Routes>
       </BrowserRouter>
