@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from "axios";
 import Home from "./pages/Home";
+import MatchListByUser from "./pages/MatchListByUser";
 import MatchList from "./pages/MatchList";
 import MatchDetail from "./pages/MatchDetail";
 import PlayerList from "./pages/PlayerList";
@@ -57,6 +58,7 @@ export default function App() {
                <Route path="/profile" element={<Profile/>} />
             </Route>
             <Route path="/users/:id" element={<PlayerDetail/>} />
+            <Route path="/matches/by-user" element={<MatchListByUser/>} />
             <Route path="/matches" element={<MatchList matches={matches}/>} />
             <Route path="/matches/:id" element={<MatchDetail/>} />
          </Routes>
