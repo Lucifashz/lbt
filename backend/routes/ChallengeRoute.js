@@ -59,10 +59,12 @@ router.post('/challenge', async (req, res) => {
          timeZone: 'Asia/Jakarta',
       }).format(errorResults.match.matchDate)
 
+      const utcDate = new Date(req.body["matchDate"]);
+      const wibDate = new Date(utcDate.getTime() - (7 * 60 * 60 * 1000));
       const results = filteredMatch.map(match => {
          const matchDate = new Date(match.matchDate);
 
-         const compareDate = new Date(req.body["matchDate"]) - matchDate;
+         const compareDate = wibDate - matchDate;
          const threeHours = 2 * 60 * 60 * 1000;
 
          if (compareDate > threeHours) {
@@ -88,7 +90,7 @@ router.post('/challenge', async (req, res) => {
                   },
                   matchReferee: req.body["matchReferee"],
                   matchType: req.body["matchType"],
-                  matchDate: req.body["matchDate"]
+                  matchDate: wibDate
                })
                .then((result) => {
                   res.status(201).json(result)
@@ -109,7 +111,7 @@ router.post('/challenge', async (req, res) => {
                   },
                   matchReferee: req.body["matchReferee"],
                   matchType: req.body["matchType"],
-                  matchDate: req.body["matchDate"]
+                  matchDate: wibDate
                })
                .then((result) => {
                   res.status(201).json(result)
