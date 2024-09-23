@@ -106,6 +106,8 @@ const updatePlayersItem2 = (players) => {
    setPlayersItem2(newPlayers);
 };
 
+   console.log(`${matchDate.toString()} ${matchTime.toString()}`)
+
 
       return (
          <>
