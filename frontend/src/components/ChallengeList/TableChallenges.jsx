@@ -152,7 +152,7 @@ export default function TableChallenges() {
                challenge.challenger.id,
                challenge.challenger.partnerId,
                challenge.challenged.id,
-               challenge.challenger.partnerId
+               challenge.challenged.partnerId
             )}
          onClickReject={
             () => updateChallenge(
